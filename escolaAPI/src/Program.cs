@@ -1,15 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using escolaAPI.src.Controller;
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddScoped<DataService>();
-builder.Services.AddScoped<XmlService>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-
-app.Run();
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var controller = new EscolaController();
+        await controller.ProcessarDados();
+    }
+}

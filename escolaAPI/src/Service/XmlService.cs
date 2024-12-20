@@ -5,11 +5,10 @@ namespace escolaAPI.src.Service;
 
 public class XmlService
 {
-    public string TransformToXml<T>(T data)
+    public void SaveToXml<T>(IEnumerable<T> items, string fileName)
     {
-        XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-        using StringWriter textWriter = new StringWriter();
-        xmlSerializer.Serialize(textWriter, data);
-        return textWriter.ToString();
+        var serializer = new XmlSerializer(typeof(List<T>));
+        using var writer = new StreamWriter(fileName);
+        serializer.Serialize(writer, items.ToList());
     }
 }
